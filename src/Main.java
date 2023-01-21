@@ -23,15 +23,15 @@ public class Main {
         System.out.println(countEven(list));
     }
 
-    public static <T> void findMinMax(Stream<? extends T> stream,
-                                      Comparator<? super T> comparator,
-                                      BiConsumer<? super T, T> minMaxConsumer) {
-        List<? extends T> list = stream.sorted(comparator).toList();
+    public static <T> void findMinMax(Stream<T> stream,
+                                      Comparator<T> comparator,
+                                      BiConsumer<T, T> minMaxConsumer) {
+        List<T> list = stream.sorted(comparator).toList();
         if (list.isEmpty()) {
             minMaxConsumer.accept(null, null);
+        } else {
+            minMaxConsumer.accept(list.get(0), list.get(list.size() - 1));
         }
-
-        minMaxConsumer.accept(list.get(0), list.get(list.size() - 1));
     }
 
     public static long countEven(List<Integer> list) {
